@@ -20,9 +20,9 @@ void main()
     mem_utils::dbgprintf("Script Context: 0x%X\n", script_context);
 }
 
-bool __stdcall DllMain( void*, std::int32_t call_reason, void* )
+BOOL WINAPI DllMain(LPVOID module_handle, DWORD attach_reason, LPVOID)
 {
-    if (call_reason == 1)
+    if (attach_reason == DLL_PROCESS_ATTACH)
         std::thread{ main }.detach();
 
     return true;
